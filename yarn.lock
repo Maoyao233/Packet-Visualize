@@ -957,6 +957,11 @@
   resolved "https://registry.npm.taobao.org/@nodelib/fs.stat/download/@nodelib/fs.stat-1.1.3.tgz?cache=0&sync_timestamp=1609074429033&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nodelib%2Ffs.stat%2Fdownload%2F%40nodelib%2Ffs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha1-K1o6s/kYzKSKjHVMCBaOPwPrphs=
 
+"@popperjs/core@^2.4.4":
+  version "2.9.2"
+  resolved "https://registry.npm.taobao.org/@popperjs/core/download/@popperjs/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
+  integrity sha1-rep7aVPLs0ZRdmsFSEaOdDxqI1M=
+
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.8.0"
   resolved "https://registry.nlark.com/@soda/friendly-errors-webpack-plugin/download/@soda/friendly-errors-webpack-plugin-1.8.0.tgz#84751d82a93019d5c92c0cf0e45ac59087cd2240"
@@ -1033,6 +1038,11 @@
   version "7.0.7"
   resolved "https://registry.nlark.com/@types/json-schema/download/@types/json-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
   integrity sha1-mKmTUWyFnrDVxMjwmDF6nqaNua0=
+
+"@types/lodash@^4.14.161":
+  version "4.14.170"
+  resolved "https://registry.nlark.com/@types/lodash/download/@types/lodash-4.14.170.tgz#0d67711d4bf7f4ca5147e9091b847479b87925d6"
+  integrity sha1-DWdxHUv39MpRR+kJG4R0ebh5JdY=
 
 "@types/mime@^1":
   version "1.3.2"
@@ -1693,6 +1703,11 @@ alphanum-sort@^1.0.0:
   resolved "https://registry.npm.taobao.org/alphanum-sort/download/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
+animate.css@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-4.1.1.tgz#614ec5a81131d7e4dc362a58143f7406abd68075"
+  integrity sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==
+
 ansi-colors@^3.0.0:
   version "3.2.4"
   resolved "https://registry.npm.taobao.org/ansi-colors/download/ansi-colors-3.2.4.tgz?cache=0&sync_timestamp=1593529711167&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fansi-colors%2Fdownload%2Fansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
@@ -1873,6 +1888,11 @@ async-limiter@~1.0.0:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/async-limiter/download/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha1-3TeelPDbgxCwgpH51kwyCXZmF/0=
+
+async-validator@^3.4.0:
+  version "3.5.2"
+  resolved "https://registry.nlark.com/async-validator/download/async-validator-3.5.2.tgz#68e866a96824e8b2694ff7a831c1a25c44d5e500"
+  integrity sha1-aOhmqWgk6LJpT/eoMcGiXETV5QA=
 
 async@^2.6.2:
   version "2.6.3"
@@ -3037,6 +3057,11 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+dayjs@1.x:
+  version "1.10.5"
+  resolved "https://registry.nlark.com/dayjs/download/dayjs-1.10.5.tgz?cache=0&sync_timestamp=1622012194079&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdayjs%2Fdownload%2Fdayjs-1.10.5.tgz#5600df4548fc2453b3f163ebb2abbe965ccfb986"
+  integrity sha1-VgDfRUj8JFOz8WPrsqu+llzPuYY=
+
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
   resolved "https://registry.npm.taobao.org/debug/download/debug-2.6.9.tgz?cache=0&sync_timestamp=1607566571506&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -3329,6 +3354,20 @@ electron-to-chromium@^1.3.723:
   version "1.3.736"
   resolved "https://registry.nlark.com/electron-to-chromium/download/electron-to-chromium-1.3.736.tgz#f632d900a1f788dab22fec9c62ec5c9c8f0c4052"
   integrity sha1-9jLZAKH3iNqyL+ycYuxcnI8MQFI=
+
+element-plus@^1.0.2-beta.45:
+  version "1.0.2-beta.45"
+  resolved "https://registry.yarnpkg.com/element-plus/-/element-plus-1.0.2-beta.45.tgz#d7d84d284ead4f9de5aa7289b9a2af4b7f109a1e"
+  integrity sha512-F5U+fx3Lg7fvUPVSxrDQ02HKQbD9Az0fd7SYoqUOZhTuC9PPYlLezs7Pzpme0893cki18Dh7BS1mBcWcUg9ZWQ==
+  dependencies:
+    "@popperjs/core" "^2.4.4"
+    "@types/lodash" "^4.14.161"
+    async-validator "^3.4.0"
+    dayjs "1.x"
+    lodash "^4.17.20"
+    mitt "^2.1.0"
+    normalize-wheel "^1.0.1"
+    resize-observer-polyfill "^1.5.1"
 
 elliptic@^6.5.3:
   version "6.5.4"
@@ -5544,6 +5583,11 @@ mississippi@^3.0.0:
     stream-each "^1.1.0"
     through2 "^2.0.0"
 
+mitt@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npm.taobao.org/mitt/download/mitt-2.1.0.tgz#f740577c23176c6205b121b2973514eade1b2230"
+  integrity sha1-90BXfCMXbGIFsSGylzUU6t4bIjA=
+
 mixin-deep@^1.2.0:
   version "1.3.2"
   resolved "https://registry.npm.taobao.org/mixin-deep/download/mixin-deep-1.3.2.tgz#1120b43dc359a785dce65b55b82e257ccf479566"
@@ -5766,6 +5810,11 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.nlark.com/normalize-url/download/normalize-url-3.3.0.tgz?cache=0&sync_timestamp=1621862230503&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fnormalize-url%2Fdownload%2Fnormalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha1-suHE3E98bVd0PfczpPWXjRhlBVk=
+
+normalize-wheel@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/normalize-wheel/download/normalize-wheel-1.0.1.tgz#aec886affdb045070d856447df62ecf86146ec45"
+  integrity sha1-rsiGr/2wRQcNhWRH32Ls+GFG7EU=
 
 npm-run-path@^2.0.0:
   version "2.0.2"
@@ -6023,6 +6072,11 @@ p-try@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npm.taobao.org/p-try/download/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha1-yyhoVA4xPWHeWPr741zpAE1VQOY=
+
+p5@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/p5/-/p5-1.3.1.tgz#7a6021bf2a42974cef71501c56e5b2120f5a2de1"
+  integrity sha512-g7W2htgEwiAEGcl0WHccAJKbunUJwrUojUSR9+KihphJ33p5VpDdh1K8pDx4ppYjOr/lVEXaZ1XXDj27nwlNOg==
 
 pako@~1.0.5:
   version "1.0.11"
@@ -7020,6 +7074,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/requires-port/download/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+resize-observer-polyfill@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.npm.taobao.org/resize-observer-polyfill/download/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha1-DpAg3T0hAkRY1OvSfiPkAmmBBGQ=
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -8248,6 +8307,11 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
+
+vue-cli-plugin-element-plus@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.nlark.com/vue-cli-plugin-element-plus/download/vue-cli-plugin-element-plus-0.0.13.tgz#da829776373aad4269fc23b57bb3aa043bc67744"
+  integrity sha1-2oKXdjc6rUJp/CO1e7OqBDvGd0Q=
 
 vue-eslint-parser@^7.6.0:
   version "7.6.0"
