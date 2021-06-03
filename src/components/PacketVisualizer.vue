@@ -116,7 +116,7 @@ import {
   getTCPHeaderInfo,
   getUDPHeaderInfo,
   getIPHeaderInfo,
-  getMacHeaderInfo,
+  getEthernetHeaderInfo,
 } from "./Add.js";
 
 export default {
@@ -181,7 +181,7 @@ export default {
           this.IPExplanation = ret.explanation;
         },
         () => {
-          const ret = getMacHeaderInfo(this.curData);
+          const ret = getEthernetHeaderInfo(this.curData);
           this.MacHeader = ret.EthernetHeader;
           this.curData = this.MacHeader + this.curData;
           this.MacExplanation = ret.explanation;
