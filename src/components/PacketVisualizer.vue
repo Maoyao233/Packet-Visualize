@@ -2,22 +2,46 @@
   <el-row id="card-row">
     <transition name="bounce">
       <el-col :span="4" v-if="MacHeader !== ''">
-        <div class="card mac-header" :class="sendingStatus">MacHeader</div>
+        <div
+          class="card mac-header"
+          :class="sendingStatus"
+          @click="MacExplanationDisp = true"
+        >
+          MacHeader
+        </div>
       </el-col>
     </transition>
     <transition name="bounce">
       <el-col :span="4" v-if="IPHeader !== ''">
-        <div class="card mac-header" :class="sendingStatus">IPHeader</div>
+        <div
+          class="card ip-header"
+          :class="sendingStatus"
+          @click="IPExplanationDisp = true"
+        >
+          IPHeader
+        </div>
       </el-col>
     </transition>
     <transition name="bounce">
       <el-col :span="4" v-if="TCPHeader !== ''">
-        <div class="card mac-header" :class="sendingStatus">TCPHeader</div>
+        <div
+          class="card tcp-header"
+          :class="sendingStatus"
+          @click="TCPExplanationDisp = true"
+        >
+          TCPHeader
+        </div>
       </el-col>
     </transition>
     <transition name="bounce">
       <el-col :span="4" v-if="UDPHeader !== ''">
-        <div class="card mac-header" :class="sendingStatus">UDPHeader</div>
+        <div
+          class="card udp-header"
+          :class="sendingStatus"
+          @click="UDPExplanationDisp = true"
+        >
+          UDPHeader
+        </div>
       </el-col>
     </transition>
     <transition name="bounce">
@@ -44,9 +68,57 @@
     </el-button>
     <el-button @click="reset()">重置 </el-button>
   </el-row>
+
+  <el-dialog title="TCP报头" v-model="TCPExplanationDisp">
+    <el-descriptions>
+      <el-descriptions-item
+        v-for="(explanation, index) in TCPExplanationDisp"
+        :key="index"
+        :label="explanation.key"
+        >{{ explanation.value }}</el-descriptions-item
+      >
+    </el-descriptions>
+  </el-dialog>
+  <el-dialog title="UDP报头" v-model="UDPExplanationDisp"
+    ><el-descriptions>
+      <el-descriptions-item
+        v-for="(explanation, index) in UDPExplanationDisp"
+        :key="index"
+        :label="explanation.key"
+        >{{ explanation.value }}</el-descriptions-item
+      >
+    </el-descriptions></el-dialog
+  >
+  <el-dialog title="IP报头" v-model="IPExplanationDisp"
+    ><el-descriptions>
+      <el-descriptions-item
+        v-for="(explanation, index) in IPExplanationDisp"
+        :key="index"
+        :label="explanation.key"
+        >{{ explanation.value }}</el-descriptions-item
+      >
+    </el-descriptions></el-dialog
+  >
+  <el-dialog title="Mac报头" v-model="MacExplanationDisp"
+    ><el-descriptions>
+      <el-descriptions-item
+        v-for="(explanation, index) in MacExplanationDisp"
+        :key="index"
+        :label="explanation.key"
+        >{{ explanation.value }}</el-descriptions-item
+      >
+    </el-descriptions></el-dialog
+  >
 </template>
 
 <script>
+import {
+  getTCPHeaderInfo,
+  getUDPHeaderInfo,
+  getIPHeaderInfo,
+  getMacHeaderInfo,
+} from "./Add.js";
+
 export default {
   name: "PacketVisualizer",
   props: {
@@ -79,19 +151,46 @@ export default {
       MacHeader: "",
       padding: "",
       curStep: 0,
+      curData: "",
       funcForStep: [
         () => {
-          if (this.protocol === "TCP") this.TCPHeader = "1";
-          else this.UDPHeader = "1";
+          /*console.log(this.data);
+          console.log(this.protocol);
+          console.log(this.srcIP);
+          console.log(this.srcPort);
+          console.log(this.dstIP);
+          console.log(this.dstPort);
+          console.log(this.srcMac);
+          console.log(this.dstMac);*/
+          if (this.protocol === "TCP") {
+            const ret = getTCPHeaderInfo(this.data, this.srcPort, this.dstPort);
+            this.TCPHeader = ret.TCPHeader;
+            this.curData = this.TCPHeader + this.data;
+            this.TCPExplanation = ret.explanation;
+          } else {
+            const ret = getUDPHeaderInfo(this.data, this.srcPort, this.dstPort);
+            this.UDPHeader = ret.UDPHeader;
+            this.curData = this.UDPHeader + this.data;
+            this.UDPExplanation = ret.explanation;
+          }
         },
         () => {
-          this.IPHeader = "1";
+          const ret = getIPHeaderInfo(this.curData);
+          this.IPHeader = ret.IPHeader;
+          this.curData = this.IPHeader + this.curData;
+          this.IPExplanation = ret.explanation;
         },
         () => {
-          this.MacHeader = "1";
+          const ret = getMacHeaderInfo(this.curData);
+          this.MacHeader = ret.EthernetHeader;
+          this.curData = this.MacHeader + this.curData;
+          this.MacExplanation = ret.explanation;
         },
         () => {
-          this.padding = "1";
+          if (this.curData.length < 60) {
+            this.padding = "\0".repeat(60 - this.curData.length);
+            this.curData += this.padding;
+          }
         },
         () => {
           this.isSended = true;
@@ -104,6 +203,10 @@ export default {
         },
         () => {
           this.TCPHeader = this.UDPHeader = "";
+          this.$message({
+            type: "success",
+            message: "传输完成！",
+          });
         },
       ],
       buttonText: [
@@ -117,6 +220,14 @@ export default {
         () => (this.protocol === "TCP" ? "解析TCP头" : "解析UDP头"),
         () => "传输完成",
       ],
+      TCPExplanation: [],
+      UDPExplanation: [],
+      IPExplanation: [],
+      MacExplanation: [],
+      TCPExplanationDisp: false,
+      UDPExplanationDisp: false,
+      IPExplanationDisp: false,
+      MacExplanationDisp: false,
       isSended: false,
     };
   },
@@ -155,6 +266,13 @@ export default {
   border-radius: 30px;
   box-shadow: 0 0 25px #1405e21b;
   transition: all 1000ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tcp-header,
+.udp-header,
+.ip-header,
+.mac-header {
+  cursor: pointer;
 }
 
 .pack-sended {
