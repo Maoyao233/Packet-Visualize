@@ -70,48 +70,58 @@
   </el-row>
 
   <el-dialog title="TCP报头" v-model="TCPExplanationDisp">
-    <el-descriptions>
+    <el-descriptions border>
       <el-descriptions-item
-        v-for="(explanation, index) in TCPExplanationDisp"
+        v-for="(explanation, index) in TCPExplanation"
         :key="index"
         :label="explanation.key"
-        >{{ explanation.value }}</el-descriptions-item
+        >{{ valueToHex(explanation.value) }}</el-descriptions-item
       >
     </el-descriptions>
   </el-dialog>
   <el-dialog title="UDP报头" v-model="UDPExplanationDisp"
-    ><el-descriptions>
+    ><el-descriptions border>
       <el-descriptions-item
-        v-for="(explanation, index) in UDPExplanationDisp"
+        v-for="(explanation, index) in UDPExplanation"
         :key="index"
         :label="explanation.key"
-        >{{ explanation.value }}</el-descriptions-item
+        >{{ valueToHex(explanation.value) }}</el-descriptions-item
       >
     </el-descriptions></el-dialog
   >
   <el-dialog title="IP报头" v-model="IPExplanationDisp"
-    ><el-descriptions>
+    ><el-descriptions border>
       <el-descriptions-item
-        v-for="(explanation, index) in IPExplanationDisp"
+        v-for="(explanation, index) in IPExplanation"
         :key="index"
         :label="explanation.key"
-        >{{ explanation.value }}</el-descriptions-item
+        >{{ valueToHex(explanation.value) }}</el-descriptions-item
       >
     </el-descriptions></el-dialog
   >
   <el-dialog title="Mac报头" v-model="MacExplanationDisp"
-    ><el-descriptions>
+    ><el-descriptions border>
       <el-descriptions-item
-        v-for="(explanation, index) in MacExplanationDisp"
+        v-for="(explanation, index) in MacExplanation"
         :key="index"
         :label="explanation.key"
-        >{{ explanation.value }}</el-descriptions-item
+        >{{ valueToHex(explanation.value) }}</el-descriptions-item
       >
     </el-descriptions></el-dialog
   >
 </template>
 
 <script>
+const toHex = (v) => {
+  let res = "";
+  while (v != 0) {
+    let u = v % 16;
+    res += u < 10 ? u : String.fromCharCode(u - 10 + "A".charCodeAt(0));
+    v >>>= 4;
+  }
+  return res === "" ? "0" : res;
+};
+
 import {
   getTCPHeaderInfo,
   getUDPHeaderInfo,
@@ -154,16 +164,8 @@ export default {
       curData: "",
       funcForStep: [
         () => {
-          /*console.log(this.data);
-          console.log(this.protocol);
-          console.log(this.srcIP);
-          console.log(this.srcPort);
-          console.log(this.dstIP);
-          console.log(this.dstPort);
-          console.log(this.srcMac);
-          console.log(this.dstMac);*/
           if (this.protocol === "TCP") {
-            const ret = getTCPHeaderInfo(this.data, this.srcPort, this.dstPort);
+            const ret = getTCPHeaderInfo(this.srcPort, this.dstPort);
             this.TCPHeader = ret.TCPHeader;
             this.curData = this.TCPHeader + this.data;
             this.TCPExplanation = ret.explanation;
@@ -175,13 +177,14 @@ export default {
           }
         },
         () => {
-          const ret = getIPHeaderInfo(this.curData);
+          const ret = getIPHeaderInfo(this.srcIP, this.dstIP);
           this.IPHeader = ret.IPHeader;
+          console.log(this.IPHeader);
           this.curData = this.IPHeader + this.curData;
           this.IPExplanation = ret.explanation;
         },
         () => {
-          const ret = getEthernetHeaderInfo(this.curData);
+          const ret = getEthernetHeaderInfo(this.srcMac, this.dstMac);
           this.MacHeader = ret.EthernetHeader;
           this.curData = this.MacHeader + this.curData;
           this.MacExplanation = ret.explanation;
@@ -243,6 +246,22 @@ export default {
         "";
       this.isSended = false;
     },
+    valueToHex(value) {
+      console.log(typeof value);
+      if (typeof value === "string") {
+        let res = "";
+        for (let index = 0; index < value.length; index++) {
+          let tmp = toHex(value.charCodeAt(index));
+          if (tmp.length === 1) {
+            tmp = "0" + tmp;
+          }
+          res += tmp + ' ';
+        }
+        return res.trim();
+      } else {
+        return toHex(Number(value));
+      }
+    },
   },
 
   /*
@@ -285,6 +304,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.el-main {
+  line-height: normal;
 }
 
 #card-row {
