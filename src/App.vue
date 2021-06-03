@@ -38,16 +38,16 @@
         </el-form>
       </el-aside>
       <el-main>
-        <PacketVisualizer ref="PacketVisualizer"
+        <PacketVisualizer
+          ref="PacketVisualizer"
           :data="submitForm.data"
           :protocol="submitForm.protocol"
-          :srcIP="submitForm.srcIP"
-          :dstIP="submitForm.dstIP"
-          :srcPort="submitForm.srcPort"
-          :dstPort="submitForm.dstPort"
-          :srcMac="submitForm.srcMac"
-          :dstMac="submitForm.dstMac"
-          :reset="reset"
+          :src-i-p="submitForm.srcIP"
+          :dst-i-p="submitForm.dstIP"
+          :src-port="submitForm.srcPort"
+          :dst-port="submitForm.dstPort"
+          :src-mac="submitForm.srcMac"
+          :dst-mac="submitForm.dstMac"
       /></el-main>
     </el-container>
     <el-footer></el-footer>
@@ -112,7 +112,8 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -130,7 +131,8 @@ export default {
   color: #333;
   text-align: center;
   height: 100px;
-
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   line-height: 60px;
 }
 
@@ -138,6 +140,7 @@ export default {
   background-color: #d3dce6;
   color: #333;
   text-align: center;
+  padding-top: 20px;
 }
 
 .el-main {
