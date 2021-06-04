@@ -13,8 +13,8 @@
 function AddVersionLength(IPv) {
   /* IP版本枚举类型（IPv4/6）*/
   var IPVersion = {
-    IPv4: 4,
-    IPv6: 6,
+	IPv4: 4,
+	IPv6: 6,
   };
   /* 首部长度默认20，后4位填4 */
   var iphead = 0x05;
@@ -133,9 +133,9 @@ function UpdateIPCheckSum(str) {
   var cksum = 0 >>> 0;
   var newstr = new String(str);
   for (var i = 0; i < 20; i++) {
-    if (i == 10 || i == 11) continue;
-    var t = newstr.charCodeAt(i);
-    cksum += t;
+	if (i == 10 || i == 11) continue;
+	var t = newstr.charCodeAt(i);
+	cksum += t;
   }
   cksum = (cksum >>> 16) + (cksum & 0xffff);
   cksum += cksum >>> 16;
@@ -175,38 +175,45 @@ function AddDestinationIP(ip) {
 /******************************* 以下是添加以太网帧 *************************************/
 /* 在已构造数据包前面添加源mac地址 参数格式"xx:xx:xx"字符串 */
 function AddSourceMac(mac) {
-  var newmac = new String(mac);
-  var macarray = newmac.split(":");
-  console.log(macarray);
-  let mac0 = "0x" + macarray[0];
-  let mac1 = "0x" + macarray[1];
-  let mac2 = "0x" + macarray[2];
-  let macnum0 = parseInt(mac0);
-  let macnum1 = parseInt(mac1);
-  let macnum2 = parseInt(mac2);
-  return (
-    String.fromCharCode(macnum0) +
-    String.fromCharCode(macnum1) +
-    String.fromCharCode(macnum2)
-  );
+	var newmac = new String(mac);
+	var macarray = newmac.split(':');
+	console.log(macarray);
+	let mac0 = "0x" + macarray[0];
+	let mac1 = "0x" + macarray[1];
+	let mac2 = "0x" + macarray[2];
+	let mac3 = "0x" + macarray[3];
+	let mac4 = "0x" + macarray[4];
+	let mac5 = "0x" + macarray[5];
+	let macnum0 = parseInt(mac0);
+	let macnum1 = parseInt(mac1);
+	let macnum2 = parseInt(mac2);
+	let macnum3 = parseInt(mac3);
+	let macnum4 = parseInt(mac4);
+	let macnum5 = parseInt(mac5);
+	return String.fromCharCode(macnum0) + String.fromCharCode(macnum1) + String.fromCharCode(macnum2) + 
+	String.fromCharCode(macnum3) + String.fromCharCode(macnum4) + String.fromCharCode(macnum5);
 }
 
 /* 在已构造数据包前面添加目的mac地址 参数格式"xx:xx:xx"字符串 */
-function AddDestMac(mac) {
-  var newmac = new String(mac);
-  var macarray = newmac.split(":");
-  console.log(macarray);
-  let mac0 = "0x" + macarray[0];
-  let mac1 = "0x" + macarray[1];
-  let mac2 = "0x" + macarray[2];
-  let macnum0 = parseInt(mac0);
-  let macnum1 = parseInt(mac1);
-  let macnum2 = parseInt(mac2);
-  return (
-    String.fromCharCode(macnum0) +
-    String.fromCharCode(macnum1) +
-    String.fromCharCode(macnum2)
-  );
+function AddDestMac(mac)
+{
+	var newmac = new String(mac);
+	var macarray = newmac.split(':');
+	console.log(macarray);
+	let mac0 = "0x" + macarray[0];
+	let mac1 = "0x" + macarray[1];
+	let mac2 = "0x" + macarray[2];
+	let mac3 = "0x" + macarray[3];
+	let mac4 = "0x" + macarray[4];
+	let mac5 = "0x" + macarray[5];
+	let macnum0 = parseInt(mac0);
+	let macnum1 = parseInt(mac1);
+	let macnum2 = parseInt(mac2);
+	let macnum3 = parseInt(mac3);
+	let macnum4 = parseInt(mac4);
+	let macnum5 = parseInt(mac5);
+	return String.fromCharCode(macnum0) + String.fromCharCode(macnum1) + String.fromCharCode(macnum2) + 
+	String.fromCharCode(macnum3) + String.fromCharCode(macnum4) + String.fromCharCode(macnum5);
 }
 
 /* 在已构造数据包前面添加以太网类型2字节 
@@ -220,20 +227,20 @@ function AddDestMac(mac) {
 */
 function AddEthernetType(type) {
   var EthernetTypeName = {
-    IPv4: "IPv4",
-    ARP: "ARP",
-    PPPoE: "PPPoE",
-    _802_1Q_tag: "802.1Q tag",
-    IPV6: "IPv6",
-    MPLS_Label: "MPLS Label",
+	IPv4: "IPv4",
+	ARP: "ARP",
+	PPPoE: "PPPoE",
+	_802_1Q_tag: "802.1Q tag",
+	IPV6: "IPv6",
+	MPLS_Label: "MPLS Label",
   };
   var EthernetTypeValue = {
-    IPv4: 0x0800,
-    ARP: 0x0806,
-    PPPoE: 0x8864,
-    _802_1Q_tag: 0x8100,
-    IPV6: 0x86dd,
-    MPLS_Label: 0x8847,
+	IPv4: 0x0800,
+	ARP: 0x0806,
+	PPPoE: 0x8864,
+	_802_1Q_tag: 0x8100,
+	IPV6: 0x86dd,
+	MPLS_Label: 0x8847,
   };
 
   var value;
@@ -241,14 +248,14 @@ function AddEthernetType(type) {
   else if (type == EthernetTypeName.ARP) value = EthernetTypeValue.ARP;
   else if (type == EthernetTypeName.PPPoE) value = EthernetTypeValue.PPPoE;
   else if (type == EthernetTypeName._802_1Q_tag)
-    value = EthernetTypeValue._802_1Q_tag;
+	value = EthernetTypeValue._802_1Q_tag;
   else if (type == EthernetTypeName.IPV6) value = EthernetTypeValue.IPV6;
   else if (type == EthernetTypeName.MPLS_Label)
-    value = EthernetTypeValue.MPLS_Label;
+	value = EthernetTypeValue.MPLS_Label;
 
   return (
-    String.fromCodePoint((value & 0xff00) >>> 8) +
-    String.fromCodePoint(value & 0xff)
+	String.fromCodePoint((value & 0xff00) >>> 8) +
+	String.fromCodePoint(value & 0xff)
   );
 }
 
@@ -344,9 +351,9 @@ function UpdateTCPCheckSum(str) {
   var cksum = 0 >>> 0;
   var newstr = new String(str);
   for (var i = 0; i < 20; i++) {
-    if (i == 16 || i == 17) continue;
-    var t = newstr.charCodeAt(i);
-    cksum += t;
+	if (i == 16 || i == 17) continue;
+	var t = newstr.charCodeAt(i);
+	cksum += t;
   }
   cksum = (cksum >>> 16) + (cksum & 0xffff);
   cksum += cksum >>> 16;
@@ -393,9 +400,9 @@ function UpdateUDPCheckSum(str) {
   var cksum = 0 >>> 0;
   var newstr = new String(strt);
   for (var i = 0; i < newstr.length; i++) {
-    if (i == 6 || i == 7) continue;
-    var t = newstr.charCodeAt(i);
-    cksum += t;
+	if (i == 6 || i == 7) continue;
+	var t = newstr.charCodeAt(i);
+	cksum += t;
   }
   cksum = (cksum >>> 16) + (cksum & 0xffff);
   cksum += cksum >>> 16;
@@ -443,116 +450,100 @@ function getTCPHeaderInfo(srcPort, destPort) {
   let checksum = AddTCPCheckSum();
   let urgentPointer = AddTCPUrgentPointer(0x0000);
   let TCPHeader =
-    SourcePort +
-    DestPort +
-    seq +
-    acknumber +
-    headerlengthandrecv +
-    flag +
-    windowsize +
-    checksum +
-    urgentPointer;
+	SourcePort +
+	DestPort +
+	seq +
+	acknumber +
+	headerlengthandrecv +
+	flag +
+	windowsize +
+	checksum +
+	urgentPointer;
   checksum = UpdateTCPCheckSum(TCPHeader);
   TCPHeader =
-    SourcePort +
-    DestPort +
-    seq +
-    acknumber +
-    headerlengthandrecv +
-    flag +
-    windowsize +
-    checksum +
-    urgentPointer;
+	SourcePort +
+	DestPort +
+	seq +
+	acknumber +
+	headerlengthandrecv +
+	flag +
+	windowsize +
+	checksum +
+	urgentPointer;
   return {
-    TCPHeader: TCPHeader,
-    explanation: [
-      {
-        key: "源端口",
-        value: SourcePort,
-        desc: "",
-      },
-      {
-        key: "目的端口",
-        value: DestPort,
-        desc: "",
-      },
-      {
-        key: "序列号",
-        value: seq,
-        desc: "",
-      },
-      {
-        key: "应答号",
-        value: acknumber,
-        desc: "",
-      },
-      {
-        key: "TCP包头长度",
-        value: headerlength,
-        desc: "",
-      },
-      {
-        key: "4bit保留位",
-        value: recv,
-        desc: "",
-      },
-      {
-        key: "CWR标志",
-        value: cwr,
-        desc: "",
-      },
-      {
-        key: "ECE标志",
-        value: ece,
-        desc: "",
-      },
-      {
-        key: "URG标志",
-        value: urg,
-        desc: "",
-      },
-      {
-        key: "ACK标志",
-        value: ack,
-        desc: "",
-      },
-      {
-        key: "PSH标志",
-        value: psh,
-        desc: "",
-      },
-      {
-        key: "RST标志",
-        value: rst,
-        desc: "",
-      },
-      {
-        key: "SYN标志",
-        value: syn,
-        desc: "",
-      },
-      {
-        key: "FIN标志",
-        value: fin,
-        desc: "",
-      },
-      {
-        key: "TCP窗体大小",
-        value: rst,
-        desc: "",
-      },
-      {
-        key: "TCP校验和",
-        value: checksum,
-        desc: "",
-      },
-      {
-        key: "紧急指针",
-        value: urgentPointer,
-        desc: "",
-      },
-    ],
-  };
+	TCPHeader: TCPHeader,
+	explanation: [
+		{
+			key: "源端口 [2 bytes]",
+			value: SourcePort,
+			desc: ""
+		},{
+			key: "目的端口 [2 bytes]",
+			value: DestPort,
+			desc: ""
+		},{
+			key:"TCP序列号 [4 bytes]",
+			value:seq,
+			desc:"标识从 TCP 源端向 TCP 目的端发送的数据字节流，它表示在这个报文段中的第一个数据字节的顺序号。"
+		},{
+			key:"TCP确认号 [4 bytes]",
+			value:acknumber,
+			desc:"发送确认的一端所期望收到的下一个顺序号"
+		},{
+			key:"TCP包长度 [4 bit]",
+			value:headerlength,
+			desc:"用[0,15]表示TCP头长，单位4字节。"
+		}, {
+			key: "4bit保留位",
+			value: recv,
+			desc: ""
+		},{
+			key:"CWR标志",
+			value:cwr,
+			desc:""
+		},{
+			key:"ECE标志",
+			value:ece,
+			desc:""
+		},{
+			key:"URG标志",
+			value:urg,
+			desc:"为 1 表示紧急指针有效，为 0 则忽略紧急指针值"
+		}, {
+			key: "ACK标志",
+			value: ack,
+			desc: "为 1 表示确认号有效，为 0 表示报文中不包含确认信息，忽略确认号字段"
+		},{
+			key:"PSH标志",
+			value:psh,
+			desc:"为 1 表示是带有 PUSH 标志的数据，指示接收方应该尽快将这个报文段交给应用层而不用等待缓冲区装满"
+		},{
+			key:"RST标志",
+			value:rst,
+			desc:"用于复位由于主机崩溃或其他原因而出现错误的连接。它还可以用于拒绝非法的报文段和拒绝连接请求。"
+		},{
+			key:"SYN标志",
+			value:syn,
+			desc:"同步序号，为 1 表示连接请求，用于建立连接和使顺序号同步"
+		},{
+			key:"FIN标志",
+			value:fin,
+			desc:"用于释放连接，为 1 表示发送方已经没有数据发送了，即关闭本方数据流"
+		},{
+			key:"TCP窗体大小 [2 bytes]",
+			value:rst,
+			desc:"表示从确认号开始，本报文的源方可以接收的字节数，即源方接收窗口大小。"
+		},{
+			key:"TCP校验和 [2 bytes]",
+			value:checksum,
+			desc:""
+		},{
+			key:"紧急指针 [2 bytes]",
+			value:urgentPointer,
+			desc:"一个正的偏移量，和顺序号字段中的值相加表示紧急数据最后一个字节的序号。"
+		}
+	]
+};
 }
 
 function getUDPHeaderInfo(data, srcPort, destPort) {
@@ -565,33 +556,30 @@ function getUDPHeaderInfo(data, srcPort, destPort) {
   checksum = UpdateUDPCheckSum(HeaderData);
   UDPHeader = SourcePort + DestPort + headerlength + checksum;
   return {
-    UDPHeader: UDPHeader,
-    explanation: [
-      {
-        key: "源端口",
-        value: SourcePort,
-        desc: "",
-      },
-      {
-        key: "目的端口",
-        value: DestPort,
-        desc: "",
-      },
-      {
-        key: "UDP数据包长",
-        value: headerlength,
-        desc: "",
-      },
-      {
-        key: "UDP校验和",
-        value: checksum,
-        desc: "",
-      },
-    ],
+	UDPHeader: UDPHeader,
+	explanation: [
+		{
+			key: "源端口",
+			value: SourcePort,
+			desc: ""
+		}, {
+			key: "目的端口",
+			value: DestPort,
+			desc: ""
+		},{
+			key: "UDP数据包长",
+			value: headerlength,
+			desc: "UDP包头和数据总长"
+		},{
+			key: "UDP校验和",
+			value: checksum,
+			desc: "对UDP包头和数据，每16 bit进行反码求和，字节数不为偶数时补0"
+		},
+	],
   };
 }
 
-function getIPHeaderInfo(SrcIP, DesIP) {
+function getIPHeaderInfo(datastr,SrcIP, DesIP) {
   let IPv = AddVersionLength(4);
   let precedence = 5;
   let d = true;
@@ -611,111 +599,95 @@ function getIPHeaderInfo(SrcIP, DesIP) {
   let sIP = AddSourceIP(SrcIP);
   let dIP = AddDestinationIP(DesIP);
   let str =
-    Identifier + FlagandFragmentOffset + ttl + proctol + checksum + sIP + dIP; //后面所有部分
+	Identifier + FlagandFragmentOffset + ttl + proctol + checksum + sIP + dIP + datastr; //后面所有部分
   let headlength = AddTotalLength(str);
-  let IPHeader = IPv + tos + headlength + str;
+  let IPHeader = IPv + tos + headlength + Identifier + FlagandFragmentOffset + ttl + proctol + checksum + sIP + dIP;
   checksum = UpdateIPCheckSum(IPHeader);
   IPHeader =
-    IPv +
-    tos +
-    headlength +
-    Identifier +
-    FlagandFragmentOffset +
-    ttl +
-    proctol +
-    checksum +
-    sIP +
-    dIP;
-  return {
-    IPHeader: IPHeader,
-    explanation: [
-      {
-        key: "IP版本",
-        value: IPv,
-        desc: "",
-      },
-      {
-        key: "服务类型",
-        value: tos,
-        desc: "",
-      },
-      {
-        key: "服务类型-优先级",
-        value: precedence,
-        desc: "",
-      },
-      {
-        key: "服务类型-d标志",
-        value: d,
-        desc: "",
-      },
-      {
-        key: "服务类型-t标志",
-        value: t,
-        desc: "",
-      },
-      {
-        key: "服务类型-r标志",
-        value: r,
-        desc: "",
-      },
-      {
-        key: "服务类型-c标志",
-        value: c,
-        desc: "",
-      },
-      {
-        key: "IP标识串",
-        value: Identifier,
-        desc: "",
-      },
-      {
-        key: "mf标志",
-        value: mf,
-        desc: "",
-      },
-      {
-        key: "df标志",
-        value: df,
-        desc: "",
-      },
-      {
-        key: "片偏移",
-        value: fo,
-        desc: "",
-      },
-      {
-        key: "ttl",
-        value: ttl,
-        desc: "",
-      },
-      {
-        key: "IP协议",
-        value: proctol,
-        desc: "",
-      },
-      {
-        key: "IP包校验和",
-        value: checksum,
-        desc: "",
-      },
-      {
-        key: "源IP地址",
-        value: sIP,
-        desc: "",
-      },
-      {
-        key: "目的IP地址",
-        value: dIP,
-        desc: "",
-      },
-      {
-        key: "IP包总长度",
-        value: headlength,
-        desc: "",
-      },
-    ],
-  };
+	IPv +
+	tos +
+	headlength +
+	Identifier +
+	FlagandFragmentOffset +
+	ttl +
+	proctol +
+	checksum +
+	sIP +
+	dIP;
+	return {
+		IPHeader: IPHeader,
+		explanation: [
+			{
+				key: "IP版本 [4 bit]及首部长度[4 bit]",
+				value: IPv,
+				desc: "高4bit指IP协议的版本，IPv4:0100/IPv6:0110，低4bit指IP首部长度，用[0,15]表示，4字节为一个单位"
+			},{
+				key: "服务类型 [8 bit]",
+				value: tos,
+				desc: "含有优先级(高3bit)和4个标志位(4bit)，最后1bit闲置"
+			},{
+				key: "优先级 服务类型中[7:5]bit",
+				value: precedence,
+				desc: "定义包的优先级，取值越大数据越重要。\n000 普通 (Routine)\n001 优先的 (Priority)\n010 立即的发送 (Immediate)\n011 闪电式的 (Flash)\n100 比闪电还闪电式的 (Flash Override)\n101 CRI/TIC/ECP\n110 网间控制 (Internetwork Control)\n111 网络控制 (Network Control)"
+			},{
+				key:"d标志 服务类型中[4]bit",
+				value:d,
+				desc:"时延: 0:普通 1:延迟尽量小"
+			},{
+				key:"t标志 服务类型中[3]bit",
+				value:t,
+				desc:"吞吐量: 0:普通 1:流量尽量大"
+			},{
+				key:"r标志 服务类型中[2]bit",
+				value:r,
+				desc:"可靠性: 0:普通 1:可靠性尽量大"
+			},{
+				key:"c标志 服务类型中[1]bit",
+				value:c,
+				desc:"传输成本: 0:普通 1:成本尽量小"
+			},{
+				key:"IP包总长度 [2 bytes]",
+				value:headlength,
+				desc:"总长度指首都及数据之和的长度"
+			},{
+				key:"IP标识串 [2 bytes]",
+				value:Identifier,
+				desc:"该字段和Flags和Fragment Offest字段联合使用，对较大的上层数据包进行分段（fragment）操作。路由器将一个包拆分后，所有拆分开的小包被标记相同的值，以便目的端设备能够区分哪个包属于被拆分开的包的一部分。"
+			},{
+				key:"MF标志 3位flag的最低位",
+				value:mf,
+				desc:"MF=1即表示后面还有分片的数据报，MF=0表示这已是若干数据报片中的最后一个"
+			}, {
+				key:"DF标志 3位flag的中间位",
+				value:df,
+				desc:"不分片的标志,只有当DF=0时才允许分片"
+			},{
+				key: "片偏移",
+				value: fo,
+				desc: "占13 bit。较长的分组在分片后,某片在原分组中的相对位置。"
+			},{
+				key:"ttl",
+				value:ttl,
+				desc:"占8 bit，表明数据报在网络中的寿命，路由转发一次-1"
+			},{
+				key:"IP协议",
+				value:proctol,
+				desc:"用数值表示所对应的协议，协议内容较多"
+			},{
+				key:"IP包校验和",
+				value:checksum,
+				desc:""
+			}, {
+				key: "源IP地址",
+				value: sIP,
+				desc: ""
+			},{
+				key:"目的IP地址",
+				value:dIP,
+				desc:""
+			}
+		]
+	}
 }
 
 function getEthernetHeaderInfo(SrcMac, DesMac) {
@@ -726,24 +698,24 @@ function getEthernetHeaderInfo(SrcMac, DesMac) {
   //let Preamble = AddPreamble();
   let EthernetHeader = sMac + dMac + type;
   return {
-    EthernetHeader: EthernetHeader,
-    explanation: [
-      {
-        key: "源Mac",
-        value: sMac,
-        desc: "",
-      },
-      {
-        key: "目的Mac",
-        value: dMac,
-        desc: "",
-      },
-      {
-        key: "以太网类型",
-        value: type,
-        desc: "",
-      },
-    ],
+	EthernetHeader: EthernetHeader,
+	explanation: [
+	  {
+		key: "源Mac",
+		value: sMac,
+		desc: "",
+	  },
+	  {
+		key: "目的Mac",
+		value: dMac,
+		desc: "",
+	  },
+	  {
+		key: "以太网类型",
+		value: type,
+		desc: "",
+	  },
+	],
   };
 }
 
