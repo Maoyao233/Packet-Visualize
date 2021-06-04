@@ -487,12 +487,12 @@ function getTCPHeaderInfo(srcPort, destPort) {
       {
         key: "源端口",
         value: SourcePort,
-        desc: "[2 bytes]",
+        desc: String(srcPort) + " [2 bytes]",
       },
       {
         key: "目的端口",
         value: DestPort,
-        desc: "[2 bytes]",
+        desc: String(destPort) + "[2 bytes]",
       },
       {
         key: "TCP序列号",
@@ -595,12 +595,12 @@ function getUDPHeaderInfo(data, srcPort, destPort) {
       {
         key: "源端口",
         value: SourcePort,
-        desc: "[2 bytes]",
+        desc: String(srcPort) + "[2 bytes]",
       },
       {
         key: "目的端口",
         value: DestPort,
-        desc: "[2 bytes]",
+        desc: String(destPort) + "[2 bytes]",
       },
       {
         key: "UDP数据包长",
@@ -754,12 +754,12 @@ function getIPHeaderInfo(datastr, SrcIP, DesIP) {
       {
         key: "源IP地址",
         value: sIP,
-        desc: "[4 bytes]",
+        desc: SrcIP + " [4 bytes]",
       },
       {
         key: "目的IP地址",
         value: dIP,
-        desc: "[4 bytes]",
+        desc: DesIP + " [4 bytes]",
       },
     ],
   };
@@ -778,12 +778,12 @@ function getEthernetHeaderInfo(SrcMac, DesMac) {
       {
         key: "源Mac",
         value: sMac,
-        desc: "[6 bytes]",
+        desc: SrcMac + " [6 bytes]",
       },
       {
         key: "目的Mac",
         value: dMac,
-        desc: "[6 bytes]",
+        desc: DesMac + " [6 bytes]",
       },
       {
         key: "以太网类型",
