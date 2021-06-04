@@ -97,7 +97,18 @@
         v-for="(explanation, index) in UDPExplanation"
         :key="index"
         :label="explanation.key"
-        >{{ valueToHex(explanation.value) }}</el-descriptions-item
+        ><el-tooltip
+          effect="light"
+          v-if="explanation.desc"
+          :content="explanation.desc"
+        >
+          <el-tag>
+            {{ valueToHex(explanation.value) }}
+          </el-tag>
+        </el-tooltip>
+        <el-tag v-else>
+          {{ valueToHex(explanation.value) }}
+        </el-tag></el-descriptions-item
       >
     </el-descriptions></el-dialog
   >
@@ -107,7 +118,18 @@
         v-for="(explanation, index) in IPExplanation"
         :key="index"
         :label="explanation.key"
-        >{{ valueToHex(explanation.value) }}</el-descriptions-item
+        ><el-tooltip
+          effect="light"
+          v-if="explanation.desc"
+          :content="explanation.desc"
+        >
+          <el-tag>
+            {{ valueToHex(explanation.value) }}
+          </el-tag>
+        </el-tooltip>
+        <el-tag v-else>
+          {{ valueToHex(explanation.value) }}
+        </el-tag></el-descriptions-item
       >
     </el-descriptions></el-dialog
   >
@@ -117,7 +139,18 @@
         v-for="(explanation, index) in MacExplanation"
         :key="index"
         :label="explanation.key"
-        >{{ valueToHex(explanation.value) }}</el-descriptions-item
+        ><el-tooltip
+          effect="light"
+          v-if="explanation.desc"
+          :content="explanation.desc"
+        >
+          <el-tag>
+            {{ valueToHex(explanation.value) }}
+          </el-tag>
+        </el-tooltip>
+        <el-tag v-else>
+          {{ valueToHex(explanation.value) }}
+        </el-tag></el-descriptions-item
       >
     </el-descriptions></el-dialog
   >
@@ -189,7 +222,7 @@ export default {
           }
         },
         () => {
-          const ret = getIPHeaderInfo(this.srcIP, this.dstIP, this.curData);
+          const ret = getIPHeaderInfo(this.curData, this.srcIP, this.dstIP);
           this.IPHeader = ret.IPHeader;
           //console.log(this.IPHeader);
           this.curData = this.IPHeader + this.curData;

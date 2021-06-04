@@ -99,11 +99,11 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.submitForm = this.form;
+      this.submitForm = Object.assign(this.submitForm, this.form);
       this.$refs.PacketVisualizer.reset();
     },
     onReset() {
-      this.form = defaultForm;
+      this.form = Object.assign(this.form, defaultForm);
       this.$refs.PacketVisualizer.reset();
     },
   },
