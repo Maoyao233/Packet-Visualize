@@ -75,8 +75,20 @@
         v-for="(explanation, index) in TCPExplanation"
         :key="index"
         :label="explanation.key"
-        >{{ valueToHex(explanation.value) }}</el-descriptions-item
       >
+        <el-tooltip
+          effect="light"
+          v-if="explanation.desc"
+          :content="explanation.desc"
+        >
+          <el-tag>
+            {{ valueToHex(explanation.value) }}
+          </el-tag>
+        </el-tooltip>
+        <el-tag v-else>
+          {{ valueToHex(explanation.value) }}
+        </el-tag>
+      </el-descriptions-item>
     </el-descriptions>
   </el-dialog>
   <el-dialog title="UDP报头" v-model="UDPExplanationDisp"
@@ -177,9 +189,9 @@ export default {
           }
         },
         () => {
-          const ret = getIPHeaderInfo(this.srcIP, this.dstIP);
+          const ret = getIPHeaderInfo(this.srcIP, this.dstIP, this.curData);
           this.IPHeader = ret.IPHeader;
-          console.log(this.IPHeader);
+          //console.log(this.IPHeader);
           this.curData = this.IPHeader + this.curData;
           this.IPExplanation = ret.explanation;
         },
@@ -247,7 +259,7 @@ export default {
       this.isSended = false;
     },
     valueToHex(value) {
-      console.log(typeof value);
+      //console.log(typeof value);
       if (typeof value === "string") {
         let res = "";
         for (let index = 0; index < value.length; index++) {
@@ -255,7 +267,7 @@ export default {
           if (tmp.length === 1) {
             tmp = "0" + tmp;
           }
-          res += tmp + ' ';
+          res += tmp + " ";
         }
         return res.trim();
       } else {
@@ -276,7 +288,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .card {
   border: 1px;
   background: #409eff77;
@@ -285,6 +297,10 @@ export default {
   border-radius: 30px;
   box-shadow: 0 0 25px #1405e21b;
   transition: all 1000ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#app > section > section > main > div > div > div.el-dialog__header {
+  padding: 30px 20px 0px;
 }
 
 .tcp-header,
@@ -306,8 +322,9 @@ export default {
   justify-content: center;
 }
 
-.el-main {
-  line-height: normal;
+.el-tag {
+  display: inline-flex;
+  align-self: center;
 }
 
 #card-row {
