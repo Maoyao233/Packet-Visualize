@@ -474,25 +474,25 @@ function getTCPHeaderInfo(srcPort, destPort) {
 	TCPHeader: TCPHeader,
 	explanation: [
 		{
-			key: "源端口 [2 bytes]",
+			key: "源端口",
 			value: SourcePort,
-			desc: ""
+			desc: "[2 bytes]"
 		},{
-			key: "目的端口 [2 bytes]",
+			key: "目的端口",
 			value: DestPort,
-			desc: ""
+			desc: "[2 bytes]"
 		},{
-			key:"TCP序列号 [4 bytes]",
+			key:"TCP序列号",
 			value:seq,
-			desc:"标识从 TCP 源端向 TCP 目的端发送的数据字节流，它表示在这个报文段中的第一个数据字节的顺序号。"
+			desc:"[4 bytes] 标识从 TCP 源端向 TCP 目的端发送的数据字节流，它表示在这个报文段中的第一个数据字节的顺序号。"
 		},{
-			key:"TCP确认号 [4 bytes]",
+			key:"TCP确认号",
 			value:acknumber,
-			desc:"发送确认的一端所期望收到的下一个顺序号"
+			desc:"[4 bytes] 发送确认的一端所期望收到的下一个顺序号"
 		},{
-			key:"TCP包长度 [4 bit]",
+			key:"TCP包长度",
 			value:headerlength,
-			desc:"用[0,15]表示TCP头长，单位4字节。"
+			desc:"[4 bit] 用[0,15]表示TCP头长，单位4字节。"
 		}, {
 			key: "4bit保留位",
 			value: recv,
@@ -530,17 +530,17 @@ function getTCPHeaderInfo(srcPort, destPort) {
 			value:fin,
 			desc:"用于释放连接，为 1 表示发送方已经没有数据发送了，即关闭本方数据流"
 		},{
-			key:"TCP窗体大小 [2 bytes]",
+			key:"TCP窗体大小",
 			value:rst,
-			desc:"表示从确认号开始，本报文的源方可以接收的字节数，即源方接收窗口大小。"
+			desc:"[2 bytes] 表示从确认号开始，本报文的源方可以接收的字节数，即源方接收窗口大小。"
 		},{
-			key:"TCP校验和 [2 bytes]",
+			key:"TCP校验和",
 			value:checksum,
-			desc:""
+			desc:"[2 bytes] 每16bit计算反码校验和"
 		},{
-			key:"紧急指针 [2 bytes]",
+			key:"紧急指针",
 			value:urgentPointer,
-			desc:"一个正的偏移量，和顺序号字段中的值相加表示紧急数据最后一个字节的序号。"
+			desc:"[2 bytes] 一个正的偏移量，和顺序号字段中的值相加表示紧急数据最后一个字节的序号。"
 		}
 	]
 };
@@ -561,19 +561,19 @@ function getUDPHeaderInfo(data, srcPort, destPort) {
 		{
 			key: "源端口",
 			value: SourcePort,
-			desc: ""
+			desc: "[2 bytes]"
 		}, {
 			key: "目的端口",
 			value: DestPort,
-			desc: ""
+			desc: "[2 bytes]"
 		},{
 			key: "UDP数据包长",
 			value: headerlength,
-			desc: "UDP包头和数据总长"
+			desc: "[2 bytes] UDP包头和数据总长"
 		},{
 			key: "UDP校验和",
 			value: checksum,
-			desc: "对UDP包头和数据，每16 bit进行反码求和，字节数不为偶数时补0"
+			desc: "[2 bytes] 对UDP包头和数据，每16 bit进行反码求和，字节数不为偶数时补0"
 		},
 	],
   };
@@ -618,49 +618,49 @@ function getIPHeaderInfo(datastr,SrcIP, DesIP) {
 		IPHeader: IPHeader,
 		explanation: [
 			{
-				key: "IP版本 [4 bit]及首部长度[4 bit]",
+				key: "IP版本及首部长度",
 				value: IPv,
-				desc: "高4bit指IP协议的版本，IPv4:0100/IPv6:0110，低4bit指IP首部长度，用[0,15]表示，4字节为一个单位"
+				desc: "[8 bit] 高4bit指IP协议的版本，IPv4:0100/IPv6:0110，低4bit指IP首部长度，用[0,15]表示，4字节为一个单位"
 			},{
-				key: "服务类型 [8 bit]",
+				key: "服务类型",
 				value: tos,
-				desc: "含有优先级(高3bit)和4个标志位(4bit)，最后1bit闲置"
+				desc: "[8 bit] 含有优先级(高3bit)和4个标志位(4bit)，最后1bit闲置"
 			},{
-				key: "优先级 服务类型中[7:5]bit",
+				key: "优先级",
 				value: precedence,
-				desc: "定义包的优先级，取值越大数据越重要。\n000 普通 (Routine)\n001 优先的 (Priority)\n010 立即的发送 (Immediate)\n011 闪电式的 (Flash)\n100 比闪电还闪电式的 (Flash Override)\n101 CRI/TIC/ECP\n110 网间控制 (Internetwork Control)\n111 网络控制 (Network Control)"
+				desc: "服务类型中[7:5]bit 定义包的优先级，取值越大数据越重要。\n000 普通 (Routine)\n001 优先的 (Priority)\n010 立即的发送 (Immediate)\n011 闪电式的 (Flash)\n100 比闪电还闪电式的 (Flash Override)\n101 CRI/TIC/ECP\n110 网间控制 (Internetwork Control)\n111 网络控制 (Network Control)"
 			},{
-				key:"d标志 服务类型中[4]bit",
+				key:"d标志",
 				value:d,
-				desc:"时延: 0:普通 1:延迟尽量小"
+				desc:"服务类型中[4]bit 时延: 0:普通 1:延迟尽量小"
 			},{
-				key:"t标志 服务类型中[3]bit",
+				key:"t标志",
 				value:t,
-				desc:"吞吐量: 0:普通 1:流量尽量大"
+				desc:"服务类型中[3]bit 吞吐量: 0:普通 1:流量尽量大"
 			},{
-				key:"r标志 服务类型中[2]bit",
+				key:"r标志",
 				value:r,
-				desc:"可靠性: 0:普通 1:可靠性尽量大"
+				desc:"服务类型中[2]bit 可靠性: 0:普通 1:可靠性尽量大"
 			},{
-				key:"c标志 服务类型中[1]bit",
+				key:"c标志",
 				value:c,
-				desc:"传输成本: 0:普通 1:成本尽量小"
+				desc:"服务类型中[1]bit 传输成本: 0:普通 1:成本尽量小"
 			},{
-				key:"IP包总长度 [2 bytes]",
+				key:"IP包总长度",
 				value:headlength,
-				desc:"总长度指首都及数据之和的长度"
+				desc:"[2 bytes] 总长度指首都及数据之和的长度"
 			},{
-				key:"IP标识串 [2 bytes]",
+				key:"IP标识串",
 				value:Identifier,
-				desc:"该字段和Flags和Fragment Offest字段联合使用，对较大的上层数据包进行分段（fragment）操作。路由器将一个包拆分后，所有拆分开的小包被标记相同的值，以便目的端设备能够区分哪个包属于被拆分开的包的一部分。"
+				desc:"[2 bytes] 该字段和Flags和Fragment Offest字段联合使用，对较大的上层数据包进行分段（fragment）操作。路由器将一个包拆分后，所有拆分开的小包被标记相同的值，以便目的端设备能够区分哪个包属于被拆分开的包的一部分。"
 			},{
-				key:"MF标志 3位flag的最低位",
+				key:"MF标志",
 				value:mf,
-				desc:"MF=1即表示后面还有分片的数据报，MF=0表示这已是若干数据报片中的最后一个"
+				desc:"3位flag的最低位 MF=1即表示后面还有分片的数据报，MF=0表示这已是若干数据报片中的最后一个"
 			}, {
-				key:"DF标志 3位flag的中间位",
+				key:"DF标志",
 				value:df,
-				desc:"不分片的标志,只有当DF=0时才允许分片"
+				desc:"3位flag的中间位 不分片的标志,只有当DF=0时才允许分片"
 			},{
 				key: "片偏移",
 				value: fo,
@@ -676,15 +676,15 @@ function getIPHeaderInfo(datastr,SrcIP, DesIP) {
 			},{
 				key:"IP包校验和",
 				value:checksum,
-				desc:""
+				desc:"[2 bytes] 每16bit计算反码校验和"
 			}, {
 				key: "源IP地址",
 				value: sIP,
-				desc: ""
+				desc: "[4 bytes]"
 			},{
 				key:"目的IP地址",
 				value:dIP,
-				desc:""
+				desc:"[4 bytes]"
 			}
 		]
 	}
@@ -703,17 +703,17 @@ function getEthernetHeaderInfo(SrcMac, DesMac) {
 	  {
 		key: "源Mac",
 		value: sMac,
-		desc: "",
+		desc: "[6 bytes]",
 	  },
 	  {
 		key: "目的Mac",
 		value: dMac,
-		desc: "",
+		desc: "[6 bytes]",
 	  },
 	  {
 		key: "以太网类型",
 		value: type,
-		desc: "",
+		desc: "[2 bytes]",
 	  },
 	],
   };
